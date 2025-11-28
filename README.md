@@ -1,6 +1,9 @@
-📊 Teams Engagement Analytics \& User Behavior Modeling
+## 📊 Teams Engagement Analytics \& User Behavior Modeling
 
 <img src="https://img.shields.io/badge/Category-Data%20Science-blue?style=for-the-badge"> <img src="https://img.shields.io/badge/Tech-Python-yellow?style=for-the-badge"> <img src="https://img.shields.io/badge/ML-Regression%20%26%20Classification-green?style=for-the-badge"> <img src="https://img.shields.io/badge/Explainability-SHAP-purple?style=for-the-badge"> <img src="https://img.shields.io/badge/Database-PostgreSQL-lightblue?style=for-the-badge">
+
+🔗 Live App:
+https://user-engagement-modeling-m.streamlit.app/
 
 🧠 Project Overview
 
@@ -341,4 +344,5 @@ Monthly active user forecasting
 Debasmita Chatterjee
 
 🔗 Add your LinkedIn / GitHub links here.
+
 
