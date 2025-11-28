@@ -1,248 +1,344 @@
-## User Engagement Modeling
+📊 Teams Engagement Analytics \& User Behavior Modeling
 
-A full analytical pipeline that generates synthetic user activity data, sessionizes event streams, engineers behavioral features, trains machine learning models, and serves real-time predictions through an interactive application.
+<img src="https://img.shields.io/badge/Category-Data%20Science-blue?style=for-the-badge"> <img src="https://img.shields.io/badge/Tech-Python-yellow?style=for-the-badge"> <img src="https://img.shields.io/badge/ML-Regression%20%26%20Classification-green?style=for-the-badge"> <img src="https://img.shields.io/badge/Explainability-SHAP-purple?style=for-the-badge"> <img src="https://img.shields.io/badge/Database-PostgreSQL-lightblue?style=for-the-badge">
 
-🔗 Live App:
-https://diya-engagement.streamlit.app
-
-This repository demonstrates strong capability in data engineering, feature engineering, machine learning, and dashboard development—aligned with real-world workplace engagement analytics.
-
-1. Project Overview
-
-This project simulates user behavior in a collaboration environment and builds a machine learning model to estimate engagement levels based on event logs and usage metrics.
-
-The workflow contains:
-
-Synthetic data generation (messages, meetings, sessions)
-
-Event sessionization using inactivity thresholds
-
-Feature engineering across multiple activity dimensions
-
-ML model training with Random Forest
-
-Model interpretability through feature importance
-
-Deployment-ready Streamlit interface
-
-Optional PostgreSQL integration
-
-2. Key Features
-
-Data Pipeline
-
-User and event generators written in Python
-
-Session stitching logic (30-minute inactivity rule)
-
-Aggregated behavior metrics per user
-
-PostgreSQL-compatible data outputs
-
-Modeling & Feature Engineering
-
-feature_engineering.ipynb notebook performs:
-
-Feature cleaning
-
-Complex aggregation
-
-Distribution analysis
-
-Outlier review
-
-Final dataset preparation
-
-Multiple ML models trained & compared
-
-Random Forest chosen as primary predictor
-
-Scaler + model saved for inference
-
-Application Layer
-
-Streamlit UI for:
-
-Single-record prediction
-
-Feature importance charts
-
-Local explanation visualization
-
-Live PostgreSQL queries
-
-Exportable prediction report
-
-3. Repository Structure
-   
-user-engagement-modeling/
-│
-├── data/                      
-│   ├── users.csv
-│   ├── events.csv
-│   ├── features.csv
-│   └── features.parquet
-│
+🧠 Project Overview
 
 
-├── models/                   
-│   ├── rf_reg.pkl
-│   ├── scaler.pkl
-│   └── feature_means.json
-│
+
+This project analyzes user behavior and engagement patterns from collaboration-platform event logs.
+
+The goal is to:
 
 
-├── src/
-│   ├── data_gen/
-│   │   └── generate_data.py
-│   ├── load_to_postgres.py
-│   └── notebooks/
-│       ├── modeling.ipynb              # ML model training
-│       └── feature_engineering.ipynb   # Data → Features pipeline
-│
+
+generate scalable synthetic usage data
 
 
-├── streamlit_app.py          
-├── requirements.txt
-└── README.md
 
-5. How to Run Locally
-   
-Environment Setup
+load and store events efficiently in PostgreSQL
+
+
+
+build behavioral features
+
+
+
+train predictive models for engagement
+
+
+
+interpret feature influence using SHAP
+
+
+
+The project demonstrates skills in data engineering, analytics, machine learning, and explainability.
+
+
+
+🗂️ Repository Structure
+
+📦 teams-engagement-project
+
+├── 📁 data/                 → Generated CSVs (users, events, features)
+
+├── 📁 models/               → Saved ML models (rf\_reg.pkl, scaler.pkl)
+
+├── 📁 src/
+
+│   ├── 📁 data\_gen/         → Synthetic event generator
+
+│   ├── load\_to\_postgres.py → Bulk loader into PostgreSQL
+
+│   └── 📁 notebooks/
+
+│       └── modeling.ipynb  → Feature engineering \& ML modeling
+
+├── venv/                    → Virtual environment
+
+└── README.md                → Project documentation
+
+
+
+🧬 Data Pipeline
+
+1️⃣ Synthetic Data Generator
+
+
+
+✔ Users
+
+✔ Collaboration events
+
+✔ Messages, meetings, sessions
+
+✔ Latency, crashes, interactions
+
+
+
+Created using Python (pandas, numpy, faker).
+
+
+
+2️⃣ Database Setup
+
+
+
+All generated data is stored in PostgreSQL 18.1.
+
+
+
+Key tables:
+
+
+
+users
+
+
+
+events
+
+
+
+sessions
+
+
+
+events\_sessionized
+
+
+
+3️⃣ Feature Engineering
+
+
+
+Features extracted from user activity:
+
+
+
+session\_duration\_sec\_mean
+
+
+
+message\_count\_sum
+
+
+
+meeting\_count\_sum
+
+
+
+event\_count\_sum
+
+
+
+avg\_latency\_mean
+
+
+
+crash\_count\_sum
+
+
+
+high\_engagement (classification target)
+
+
+
+🤖 Machine Learning Models
+
+🔢 Regression Models
+
+Model	RMSE	R²
+
+Linear Regression	0.00	1.000
+
+Decision Tree	1.39	0.996
+
+Random Forest	1.76	0.994
+
+SVM	17.81	0.373
+
+Neural Network (MLP)	43.51	-2.740
+
+🟦 Classification Models
+
+Model	Accuracy	F1 Score
+
+Decision Tree	1.00	1.00
+
+Random Forest	1.00	1.00
+
+SVM	0.82	0.83
+
+Neural Network	0.86	0.86
+
+
+
+✔ Tree-based models performed the strongest on engagement prediction.
+
+✔ SVM \& MLP performed moderately well with non-linear patterns.
+
+
+
+🔍 Model Explainability (SHAP)
+
+✔ SHAP Summary Plot
+
+
+
+Shows global influence of each feature on engagement prediction.
+
+
+
+✔ SHAP Bar Plot
+
+
+
+Ranks the most impactful features.
+
+
+
+✔ SHAP Dependence Plots
+
+
+
+Shows how interaction intensity changes prediction values.
+
+
+
+Key Feature Insights
+
+
+
+session\_duration\_sec\_mean → strongest positive influence
+
+
+
+event\_count\_mean / event\_count\_sum → strong activity indicators
+
+
+
+meeting\_count\_sum → contributes to consistent engagement
+
+
+
+message\_count\_sum → communication-driven interaction
+
+
+
+avg\_latency\_mean → higher latency reduces engagement
+
+
+
+crash\_count\_sum → reliability impacts behavior
+
+
+
+🏁 How to Run the Project Locally
+
+1\. Clone the repository
+
+git clone https://github.com/yourusername/teams-engagement-project.git
+
+cd teams-engagement-project
+
+
+
+2\. Create a virtual environment
 
 python -m venv venv
 
-venv\Scripts\activate
+venv\\Scripts\\activate
 
-Install Dependencies
+
+
+3\. Install dependencies
 
 pip install -r requirements.txt
 
-Start Streamlit Application
 
-streamlit run streamlit_app.py
 
-5. Data Pipeline Summary
-   
-1. Synthetic Generation
+4\. Generate data
 
-Creates:
+python src/data\_gen/generate\_data.py
 
-Users
 
-Meetings
 
-Messages
+5\. Load data into PostgreSQL
 
-Latency readings
+python src/load\_to\_postgres.py
 
-Crash logs
 
-Session timestamps
 
-2. Sessionization Logic
+6\. Open the modeling notebook
 
-Events are grouped into sessions using:
+jupyter notebook src/notebooks/modeling.ipynb
 
-30-minute inactivity gap
 
-Per-user event ordering
 
-End timestamps + session durations
+💾 Saved Models
 
-3. Feature Engineering Notebook
 
-feature_engineering.ipynb produces:
 
-Session statistics
+Models are exported to:
 
-Activity intensity measures
 
-Event/meeting/message aggregates
 
-Crash behavior
+models/
 
-Latency averages
+ └── rf\_reg.pkl
 
-Final features.csv + features.parquet
+ └── scaler.pkl
 
-4. Machine Learning
 
-modeling.ipynb trains:
 
-Linear Regression
 
-Decision Tree
 
-Random Forest (chosen)
+These can be used for API inference, dashboards, or deployment.
 
-SVM
 
-MLP Neural Network
 
-Artifacts saved for deployment:
+🛠️ Tech Stack
 
-rf_reg.pkl
+Area	Tools
 
-scaler.pkl
+Programming	Python
 
-feature_means.json
+ML	sklearn, SHAP
 
-6. Streamlit Application Overview
-   
-Prediction Interface
+Data	Pandas, NumPy
 
-Users enter activity metrics
+Database	PostgreSQL
 
-Input is standardized using stored scaler
+Visualization	Matplotlib, SHAP
 
-Random Forest model predicts engagement score
+Environment	venv
 
-Interpretability
+📈 Future Enhancements
 
-Global feature importance
 
-Local contribution analysis
 
-Operational Features
+Streamlit or Gradio interactive dashboard
 
-PostgreSQL live query support
 
-Report download option
 
-🔗 Live App:
-https://diya-engagement.streamlit.app
+Real-time inference API
 
-7. Technology Stack
 
-Python 3.10+
 
-Pandas, NumPy
+Power BI visualization
 
-Scikit-learn
 
-Matplotlib
 
-Joblib
+Monthly active user forecasting
 
-Streamlit
 
-PostgreSQL (optional)
 
-JupyterLab for analysis
+🙌 Author
 
-8. Ideal Use Cases
 
-This project applies to:
 
-Employee engagement analytics
+Debasmita Chatterjee
 
-Workspace behavior modeling
+🔗 Add your LinkedIn / GitHub links here.
 
-Product usage scoring
-
-Productivity platforms
-
-Early churn detection
-
-User insights for product teams
