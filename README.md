@@ -321,9 +321,6 @@ Environment	venv
 
 
 
-Streamlit or Gradio interactive dashboard
-
-
 
 Real-time inference API
 
@@ -336,13 +333,5 @@ Power BI visualization
 Monthly active user forecasting
 
 
-
-🙌 Author
-
-
-
-Debasmita Chatterjee
-
-🔗 Add your LinkedIn / GitHub links here.
 
 
