@@ -6,6 +6,7 @@ import json
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+import os
 
 # ---------------------------------------------
 # PAGE SETTINGS
@@ -17,14 +18,14 @@ st.set_page_config(
 )
 
 # ---------------------------------------------
-# LOAD MODELS + SCALER + MEANS
+# LOAD MODELS + SCALER + MEANS (Cross-platform paths)
 # ---------------------------------------------
-MODEL_DIR = r"C:\Users\Diya\Downloads\teams-engagement-project\models"
+MODEL_DIR = os.path.join("models")
 
-rf_reg = joblib.load(f"{MODEL_DIR}\\rf_reg.pkl")
-scaler = joblib.load(f"{MODEL_DIR}\\scaler.pkl")
+rf_reg = joblib.load(os.path.join(MODEL_DIR, "rf_reg.pkl"))
+scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 
-with open(f"{MODEL_DIR}\\feature_means.json", "r") as f:
+with open(os.path.join(MODEL_DIR, "feature_means.json"), "r") as f:
     feature_means = json.load(f)
 
 expected_features = list(feature_means.keys())
@@ -36,7 +37,6 @@ ui_features = [
     "session_count",
     "session_duration_sec_mean"
 ]
-
 
 # ---------------------------------------------
 # THEME TOGGLE
@@ -131,7 +131,7 @@ elif page == "📈 Predict Engagement":
         sess = col2.number_input(
             "📌 session_count",
             min_value=1.0,
-            value=float(5.0)
+            value=5.0
         )
 
         avg = col2.number_input(
