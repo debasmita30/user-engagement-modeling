@@ -23,6 +23,70 @@
 
 ---
 
+---
+
+## ❓ Problem Statement
+
+Collaboration platforms like Microsoft Teams generate **millions of behavioral events daily** — messages, meetings, sessions, crashes — yet this data sits unused beyond basic dashboards. Without intelligent analysis, teams operate blind:
+
+| Business Question | Without This System | Consequence |
+|---|---|---|
+| *Which users are disengaging?* | No predictive signal | Churn spotted only after it happens |
+| *What platform issues hurt retention?* | Anecdotal feedback only | Engineering fixes the wrong things |
+| *What separates power users from at-risk ones?* | Unknown | Product roadmap lacks data grounding |
+| *Why is a specific user flagged low-engagement?* | Black-box dashboards | Customer success has no action plan |
+| *How do crashes and latency affect retention?* | Correlation studies only | Infrastructure spend is mis-targeted |
+
+```
+  Raw Event Logs   ──────────────►  ❌ No Intelligence
+  (millions of rows)
+                          ▲
+      No feature engineering    → signals buried in raw logs
+      No ML on behavioral data  → trends stay invisible
+      No explainability layer   → predictions unactionable
+      No live stakeholder UI    → insights never reach the team
+```
+
+---
+
+## ✅ Solution
+
+This project closes every gap above — from raw event ingestion to explainable, real-time engagement predictions.
+
+```
+  ┌─────────────────────────────────────────────────────────────┐
+  │                   SOLUTION AT A GLANCE                       │
+  ├─────────────────────────────────────────────────────────────┤
+  │                                                             │
+  │  INGEST    →  Raw event logs into structured PostgreSQL     │
+  │                                                             │
+  │  ENGINEER  →  12 behavioral features per user via SQL       │
+  │               (session depth · activity breadth ·           │
+  │                reliability signals)                         │
+  │                                                             │
+  │  PREDICT   →  Engagement score (regression) +              │
+  │               High / Low label (classification)             │
+  │                                                             │
+  │  EXPLAIN   →  SHAP per prediction — "this user scores low   │
+  │               because crash_count is high and sessions      │
+  │               are short"                                    │
+  │                                                             │
+  │  SERVE     →  Live Streamlit dashboard with EDA, model      │
+  │               results, SHAP explorer, live predictor        │
+  │                                                             │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+| Decision | Rationale |
+|---|---|
+| **Random Forest** as primary model | Best generalization, native SHAP support, handles feature interactions |
+| **SQL aggregation** for features | Scales to millions of events with PostgreSQL GROUP BY + indexes |
+| **SHAP** over standard feature importance | Per-prediction explanations — actionable at the individual user level |
+| **PostgreSQL** over flat files | Enables complex joins, indexing, and future real-data integration |
+
+---
+
+
 ## 🧠 Project Overview
 
 This project analyzes **user behavior and engagement patterns** from collaboration-platform event logs.
@@ -323,3 +387,4 @@ models/
 🔗 [**Open Live App →**](https://user-engagement-modeling-m.streamlit.app/)
 
 </div>
+
